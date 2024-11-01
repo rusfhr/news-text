@@ -8,7 +8,7 @@ conn = mysql.connector.connect(
 
 cursor = conn.cursor()
 
-cursor.execute("CREATE DATABASE review")
+cursor.execute("CREATE DATABASE article")
 
 print("Success create database")
 
