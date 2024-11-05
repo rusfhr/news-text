@@ -34,10 +34,10 @@ def fetch_naver_news(url):
     # 제목과 본문 추출
     title = soup.find("h2", {"class" : "media_end_head_headline"}).get_text(strip=True)
     content = soup.find("article", {"class" : "go_trans _article_content"}).get_text(strip=True)
-    publish_date_str = soup.find("span", {"class" : "media_end_head_info_datestamp_time _ARTICLE_DATE_TIME"}).get_text(strip=True)
+    publish_date_str = soup.find("span", {"class" : "media_end_head_info_datestamp_time _ARTICLE_DATE_TIME"}).get_text(strip = True)
 
     # 날짜 형식 변환
-    publish_date = datetime.strptime(publish_date_str, "%Y.%m.%d. %I:%M").date()  # 날짜 형식에 맞게 조정
+    publish_date = datetime.strptime(publish_date_str, "%Y.%m.%d. %p %I:%M").date()  # 날짜 형식에 맞게 조정
 
     return title, content, url, publish_date.date()
 
@@ -51,7 +51,7 @@ def save_news_to_db(title, content, url, publish_date):
     conn.commit()
 
 # 뉴스 URL 지정
-news_url = "https://n.news.naver.com/mnews/article/001/0012669933?sid=100"
+news_url = "https://n.news.naver.com/mnews/article/005/0001735722"
 
 # 뉴스 데이터 크롤링 및 MySQL 적재
 title, content, url, publish_date = fetch_naver_news(news_url)
